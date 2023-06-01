@@ -1,0 +1,32 @@
+plugins {
+  id 'java-library'
+  id 'maven-publish'
+}
+
+group = 'com.zyntaxmind'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+repositories {
+  mavenCentral()
+}
+
+java {
+  withSourcesJar()
+}
+
+dependencies {
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.15.2'
+}
+
+publishing {
+  publications {
+    myLib(MavenPublication) {
+      from components.java
+    }
+  }
+}
+
+tasks.named('test') {
+  useJUnitPlatform()
+}
