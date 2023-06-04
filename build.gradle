@@ -1,6 +1,5 @@
 plugins {
-  id 'java-library'
-  id 'maven-publish'
+  id 'java'
 }
 
 group = 'com.zyntaxmind'
@@ -16,7 +15,7 @@ java {
 }
 
 dependencies {
-  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.15.2'
+  implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
 }
 
 tasks.named('test') {
