@@ -1,5 +1,6 @@
 plugins {
-  id 'java'
+  id 'java-library'
+  id 'maven-publish'
 }
 
 group = 'com.zyntaxmind'
@@ -16,6 +17,24 @@ java {
 
 dependencies {
   implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+}
+
+publishing {
+  repositories {
+    maven {
+      name = project.findProperty("azure.publisher.name")
+      url = uri(project.findProperty("azure.publisher.maven.url"))
+      credentials {
+        username = project.findProperty("azure.publisher.username")
+        password = project.findProperty("azure.publisher.token")
+      }
+    }
+  }
+  publications {
+    gpr(MavenPublication) {
+      from(components.java)
+    }
+  }
 }
 
 tasks.named('test') {
